@@ -12,7 +12,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Authentic Latvian linen, hand-knit wool mittens & hats, amber and traditional souvenirs in the heart of Riga's Old Town." },
       { property: "og:title", content: "Linen & Souvenirs — Riga Old Town" },
       { property: "og:description", content: "Authentic Latvian linen and handcrafted souvenirs at Mazā Pils iela 4, Riga." },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });

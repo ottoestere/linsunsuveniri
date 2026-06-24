@@ -4,6 +4,17 @@ import { useServerFn } from "@tanstack/react-start";
 import { getPost } from "@/lib/wordpress.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
+  head: ({ params }) => ({
+    meta: [
+      { title: "Journal — Linen & Souvenirs Riga" },
+      { name: "description", content: "Stories from our linen and souvenir boutique in Riga's Old Town." },
+      { property: "og:title", content: "Journal — Linen & Souvenirs" },
+      { property: "og:description", content: "Stories from our linen and souvenir boutique in Riga's Old Town." },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: `/blog/${params.slug}` },
+    ],
+    links: [{ rel: "canonical", href: `/blog/${params.slug}` }],
+  }),
   component: Post,
   errorComponent: ({ error }) => (
     <div className="p-12 text-center text-muted-foreground">{error.message}</div>
