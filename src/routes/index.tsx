@@ -41,7 +41,7 @@ function Nav() {
         <nav className="hidden md:flex items-center gap-10 text-sm text-primary-foreground/90">
           <a href="#story" className="hover:text-primary-foreground transition">Our Story</a>
           <a href="#collection" className="hover:text-primary-foreground transition">Collection</a>
-          <a href="#reviews" className="hover:text-primary-foreground transition">Reviews</a>
+          <a href="/blog" className="hover:text-primary-foreground transition">Journal</a>
           <a href="#visit" className="hover:text-primary-foreground transition">Visit</a>
         </nav>
         <a
