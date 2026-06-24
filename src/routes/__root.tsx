@@ -77,22 +77,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Linen & Souvenirs — Handcrafted Latvian Treasures in Riga Old Town" },
+      { name: "description", content: "Authentic Latvian linen, hand-knit wool mittens, and traditional souvenirs in the heart of Riga's Old Town. Mazā Pils iela 4." },
+      { name: "author", content: "Linen & Souvenirs Riga" },
+      { property: "og:title", content: "Linen & Souvenirs — Riga Old Town" },
+      { property: "og:description", content: "Authentic Latvian linen and handcrafted souvenirs since generations. Visit us at Mazā Pils iela 4, Riga." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap",
+      },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
