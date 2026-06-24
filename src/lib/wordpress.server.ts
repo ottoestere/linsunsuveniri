@@ -1,4 +1,5 @@
 const GATEWAY = "https://connector-gateway.lovable.dev/wordpress_com";
+const DEFAULT_SITE_ID = "255764913";
 
 function headers() {
   const lov = process.env.LOVABLE_API_KEY;
@@ -13,7 +14,27 @@ function headers() {
 }
 
 function site() {
-  return process.env.WORDPRESS_SITE || "linenriga.wordpress.com";
+  return process.env.WORDPRESS_SITE_ID || DEFAULT_SITE_ID;
+}
+
+function wordpressError(status: number, body: string) {
+  try {
+    const parsed = JSON.parse(body) as { error?: string; message?: string };
+    if (parsed.error === "unknown_blog") {
+      return new Error(
+        "The connected WordPress.com account cannot access the configured Linen Riga blog. Reconnect WordPress.com with the site owner's account.",
+      );
+    }
+    if (parsed.error === "authorization_required" || parsed.error === "unauthorized") {
+      return new Error(
+        "WordPress.com needs to be reconnected with permission to read and manage posts for this site.",
+      );
+    }
+    if (parsed.message) return new Error(parsed.message);
+  } catch {
+    // Fall through to the generic message below.
+  }
+  return new Error(`WordPress.com request failed (${status}). Please try again.`);
 }
 
 export async function wpGet(path: string, query: Record<string, string | number> = {}) {
@@ -23,7 +44,7 @@ export async function wpGet(path: string, query: Record<string, string | number>
   const url = `${GATEWAY}/rest/v1.1/sites/${encodeURIComponent(site())}${path}${qs ? `?${qs}` : ""}`;
   const r = await fetch(url, { headers: headers() });
   const text = await r.text();
-  if (!r.ok) throw new Error(`WP ${r.status}: ${text}`);
+  if (!r.ok) throw wordpressError(r.status, text);
   return JSON.parse(text);
 }
 
@@ -31,6 +52,6 @@ export async function wpPost(path: string, body: unknown) {
   const url = `${GATEWAY}/rest/v1.1/sites/${encodeURIComponent(site())}${path}`;
   const r = await fetch(url, { method: "POST", headers: headers(), body: JSON.stringify(body) });
   const text = await r.text();
-  if (!r.ok) throw new Error(`WP ${r.status}: ${text}`);
+  if (!r.ok) throw wordpressError(r.status, text);
   return JSON.parse(text);
 }
