@@ -66,12 +66,12 @@ function Nav({ t }: { t: (key: string) => string }) {
 }
 
 
-function Hero() {
+function Hero({ t }: { t: (key: string) => string }) {
   return (
     <section className="relative min-h-[100vh] flex items-end overflow-hidden">
       <img
         src={heroLinen}
-        alt="Handwoven Latvian linen"
+        alt={t("collection.linen.title")}
         width={1600}
         height={1100}
         className="absolute inset-0 w-full h-full object-cover"
@@ -79,33 +79,34 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/10 to-primary/70" />
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-40 w-full">
         <p className="text-primary-foreground/80 uppercase tracking-[0.3em] text-xs mb-6">
-          Since generations · Riga, Latvia
+          {t("hero.tagline")}
         </p>
-        <h1 className="font-serif text-primary-foreground text-5xl md:text-7xl lg:text-8xl leading-[1.05] max-w-4xl">
-          Handwoven stories<br />from the Baltic.
-        </h1>
+        <h1
+          className="font-serif text-primary-foreground text-5xl md:text-7xl lg:text-8xl leading-[1.05] max-w-4xl"
+          dangerouslySetInnerHTML={{ __html: t("hero.title") }}
+        />
         <p className="mt-8 max-w-xl text-primary-foreground/90 text-lg leading-relaxed">
-          A small family-run boutique in the heart of Riga's Old Town, offering
-          pure Latvian linen, hand-knit wool, amber and the quiet beauty of traditional craft.
+          {t("hero.description")}
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <a
             href="#collection"
             className="bg-accent text-accent-foreground px-7 py-4 text-sm tracking-wide uppercase hover:bg-accent/90 transition"
           >
-            Explore the Collection
+            {t("hero.ctaExplore")}
           </a>
           <a
             href="#visit"
             className="border border-primary-foreground/50 text-primary-foreground px-7 py-4 text-sm tracking-wide uppercase hover:bg-primary-foreground/10 transition"
           >
-            Find the Store
+            {t("hero.ctaFind")}
           </a>
         </div>
       </div>
     </section>
   );
 }
+
 
 function Story() {
   return (
