@@ -259,11 +259,16 @@ function getByKey(obj: Record<string, string>, key: string) {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
+  const [lang, setLangState] = useState<Lang>("en");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     const saved = window.localStorage.getItem(STORAGE_KEY) as Lang;
-    return saved === "lv" ? "lv" : "en";
-  });
+    if (saved === "lv" || saved === "en") {
+      setLangState(saved);
+      document.documentElement.lang = saved;
+    }
+  }, []);
 
   const setLang = (next: Lang) => {
     setLangState(next);
