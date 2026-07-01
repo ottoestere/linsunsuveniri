@@ -218,31 +218,31 @@ function Collection({ t }: { t: (key: string) => string }) {
 }
 
 
-function Reviews() {
+function Reviews({ t }: { t: (key: string) => string }) {
   const reviews = [
     {
       name: "Mark P",
-      when: "Google Review",
-      text: "The store sells a variety of knitted hats. The colors and designs are wonderful. I recommend visiting the gift store! I would love to return.",
+      when: t("reviews.google"),
+      text: t("reviews.mark"),
     },
     {
       name: "Michael Woodall",
-      when: "Google Review",
-      text: "Found all of the linen things I wanted in Latvia at a decent price. They have anything from ties to tablecloths — beautifully made.",
+      when: t("reviews.google"),
+      text: t("reviews.michael"),
     },
     {
       name: "Igor Kowalski",
-      when: "Google Review",
-      text: "Great service, awesome souvenirs and low prices. A must-visit when you're in Riga.",
+      when: t("reviews.google"),
+      text: t("reviews.igor"),
     },
   ];
   return (
     <section id="reviews" className="py-28 md:py-40 bg-background">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">5.0 on Google</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("reviews.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-primary max-w-2xl mx-auto leading-tight">
-            Loved by visitors from across the world.
+            {t("reviews.title")}
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -262,6 +262,7 @@ function Reviews() {
     </section>
   );
 }
+
 
 function Visit() {
   return (
