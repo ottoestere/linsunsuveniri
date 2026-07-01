@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useI18n } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import heroLinen from "@/assets/hero-linen.jpg";
 import mittens from "@/assets/mittens.jpg";
 import linenStack from "@/assets/linen-stack.jpg";
 import hat from "@/assets/hat.jpg";
 import riga from "@/assets/riga.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
