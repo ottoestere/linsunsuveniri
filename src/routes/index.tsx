@@ -38,7 +38,7 @@ function Index() {
 }
 
 
-function Nav() {
+function Nav({ t }: { t: (key: string) => string }) {
   return (
     <header className="absolute top-0 left-0 right-0 z-20">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
@@ -46,21 +46,25 @@ function Nav() {
           Linen <span className="opacity-60">&</span> Souvenirs
         </a>
         <nav className="hidden md:flex items-center gap-10 text-sm text-primary-foreground/90">
-          <a href="#story" className="hover:text-primary-foreground transition">Our Story</a>
-          <a href="#collection" className="hover:text-primary-foreground transition">Collection</a>
-          <a href="/blog" className="hover:text-primary-foreground transition">Journal</a>
-          <a href="#visit" className="hover:text-primary-foreground transition">Visit</a>
+          <a href="#story" className="hover:text-primary-foreground transition">{t("nav.story")}</a>
+          <a href="#collection" className="hover:text-primary-foreground transition">{t("nav.collection")}</a>
+          <a href="/blog" className="hover:text-primary-foreground transition">{t("nav.journal")}</a>
+          <a href="#visit" className="hover:text-primary-foreground transition">{t("nav.visit")}</a>
         </nav>
-        <a
-          href="tel:+37126554999"
-          className="hidden md:inline-flex items-center gap-2 text-sm text-primary-foreground border border-primary-foreground/40 rounded-full px-4 py-2 hover:bg-primary-foreground/10 transition"
-        >
-          +371 26 554 999
-        </a>
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher className="text-primary-foreground" />
+          <a
+            href="tel:+37126554999"
+            className="hidden md:inline-flex items-center gap-2 text-sm text-primary-foreground border border-primary-foreground/40 rounded-full px-4 py-2 hover:bg-primary-foreground/10 transition"
+          >
+            +371 26 554 999
+          </a>
+        </div>
       </div>
     </header>
   );
 }
+
 
 function Hero() {
   return (
