@@ -108,29 +108,22 @@ function Hero({ t }: { t: (key: string) => string }) {
 }
 
 
-function Story() {
+function Story({ t }: { t: (key: string) => string }) {
   return (
     <section id="story" className="py-28 md:py-40 bg-background">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16 items-center">
         <div>
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">Our Story</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("story.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl leading-tight text-primary mb-8">
-            A small shop on Mazā Pils, where every thread has a place to belong.
+            {t("story.title")}
           </h2>
-          <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-            Tucked into one of Riga's oldest cobblestone lanes, our store has welcomed
-            travelers from all over the world for years. We curate Latvian linen woven
-            in nearby workshops, wool knitted by hand in the countryside, and souvenirs
-            chosen one piece at a time.
-          </p>
-          <p className="text-muted-foreground leading-relaxed text-lg">
-            Nothing mass-produced. Nothing without a story.
-          </p>
+          <p className="text-muted-foreground leading-relaxed text-lg mb-6">{t("story.p1")}</p>
+          <p className="text-muted-foreground leading-relaxed text-lg">{t("story.p2")}</p>
         </div>
         <div className="relative">
           <img
             src={riga}
-            alt="Cobblestone street in Riga Old Town"
+            alt={t("visit.title")}
             width={1400}
             height={900}
             loading="lazy"
@@ -139,17 +132,16 @@ function Story() {
           <div className="absolute -bottom-8 -left-8 bg-card border border-border p-8 max-w-xs hidden md:block">
             <p className="font-serif text-primary text-3xl">5.0</p>
             <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
-              Google Reviews
+              {t("story.rating")}
             </p>
-            <p className="text-sm text-muted-foreground mt-3">
-              "Great service, awesome souvenirs and low prices."
-            </p>
+            <p className="text-sm text-muted-foreground mt-3">"{t("story.review")}"</p>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function Collection() {
   const items = [
