@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useI18n } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import heroLinen from "@/assets/hero-linen.jpg";
 import mittens from "@/assets/mittens.jpg";
 import linenStack from "@/assets/linen-stack.jpg";
 import hat from "@/assets/hat.jpg";
 import riga from "@/assets/riga.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,20 +23,22 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Story />
-      <Collection />
-      <Reviews />
-      <Visit />
-      <Footer />
+      <Nav t={t} />
+      <Hero t={t} />
+      <Story t={t} />
+      <Collection t={t} />
+      <Reviews t={t} />
+      <Visit t={t} />
+      <Footer t={t} />
     </div>
   );
 }
 
-function Nav() {
+
+function Nav({ t }: { t: (key: string) => string }) {
   return (
     <header className="absolute top-0 left-0 right-0 z-20">
       <div className="mx-auto max-w-7xl px-6 py-6 flex items-center justify-between">
@@ -41,28 +46,32 @@ function Nav() {
           Linen <span className="opacity-60">&</span> Souvenirs
         </a>
         <nav className="hidden md:flex items-center gap-10 text-sm text-primary-foreground/90">
-          <a href="#story" className="hover:text-primary-foreground transition">Our Story</a>
-          <a href="#collection" className="hover:text-primary-foreground transition">Collection</a>
-          <a href="/blog" className="hover:text-primary-foreground transition">Journal</a>
-          <a href="#visit" className="hover:text-primary-foreground transition">Visit</a>
+          <a href="#story" className="hover:text-primary-foreground transition">{t("nav.story")}</a>
+          <a href="#collection" className="hover:text-primary-foreground transition">{t("nav.collection")}</a>
+          <a href="/blog" className="hover:text-primary-foreground transition">{t("nav.journal")}</a>
+          <a href="#visit" className="hover:text-primary-foreground transition">{t("nav.visit")}</a>
         </nav>
-        <a
-          href="tel:+37126554999"
-          className="hidden md:inline-flex items-center gap-2 text-sm text-primary-foreground border border-primary-foreground/40 rounded-full px-4 py-2 hover:bg-primary-foreground/10 transition"
-        >
-          +371 26 554 999
-        </a>
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher className="text-primary-foreground" />
+          <a
+            href="tel:+37126554999"
+            className="hidden md:inline-flex items-center gap-2 text-sm text-primary-foreground border border-primary-foreground/40 rounded-full px-4 py-2 hover:bg-primary-foreground/10 transition"
+          >
+            +371 26 554 999
+          </a>
+        </div>
       </div>
     </header>
   );
 }
 
-function Hero() {
+
+function Hero({ t }: { t: (key: string) => string }) {
   return (
     <section className="relative min-h-[100vh] flex items-end overflow-hidden">
       <img
         src={heroLinen}
-        alt="Handwoven Latvian linen"
+        alt={t("collection.linen.title")}
         width={1600}
         height={1100}
         className="absolute inset-0 w-full h-full object-cover"
@@ -70,27 +79,27 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/10 to-primary/70" />
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-40 w-full">
         <p className="text-primary-foreground/80 uppercase tracking-[0.3em] text-xs mb-6">
-          Since generations · Riga, Latvia
+          {t("hero.tagline")}
         </p>
-        <h1 className="font-serif text-primary-foreground text-5xl md:text-7xl lg:text-8xl leading-[1.05] max-w-4xl">
-          Handwoven stories<br />from the Baltic.
-        </h1>
+        <h1
+          className="font-serif text-primary-foreground text-5xl md:text-7xl lg:text-8xl leading-[1.05] max-w-4xl"
+          dangerouslySetInnerHTML={{ __html: t("hero.title") }}
+        />
         <p className="mt-8 max-w-xl text-primary-foreground/90 text-lg leading-relaxed">
-          A small family-run boutique in the heart of Riga's Old Town, offering
-          pure Latvian linen, hand-knit wool, amber and the quiet beauty of traditional craft.
+          {t("hero.description")}
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <a
             href="#collection"
             className="bg-accent text-accent-foreground px-7 py-4 text-sm tracking-wide uppercase hover:bg-accent/90 transition"
           >
-            Explore the Collection
+            {t("hero.ctaExplore")}
           </a>
           <a
             href="#visit"
             className="border border-primary-foreground/50 text-primary-foreground px-7 py-4 text-sm tracking-wide uppercase hover:bg-primary-foreground/10 transition"
           >
-            Find the Store
+            {t("hero.ctaFind")}
           </a>
         </div>
       </div>
@@ -98,29 +107,23 @@ function Hero() {
   );
 }
 
-function Story() {
+
+function Story({ t }: { t: (key: string) => string }) {
   return (
     <section id="story" className="py-28 md:py-40 bg-background">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16 items-center">
         <div>
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">Our Story</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("story.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl leading-tight text-primary mb-8">
-            A small shop on Mazā Pils, where every thread has a place to belong.
+            {t("story.title")}
           </h2>
-          <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-            Tucked into one of Riga's oldest cobblestone lanes, our store has welcomed
-            travelers from all over the world for years. We curate Latvian linen woven
-            in nearby workshops, wool knitted by hand in the countryside, and souvenirs
-            chosen one piece at a time.
-          </p>
-          <p className="text-muted-foreground leading-relaxed text-lg">
-            Nothing mass-produced. Nothing without a story.
-          </p>
+          <p className="text-muted-foreground leading-relaxed text-lg mb-6">{t("story.p1")}</p>
+          <p className="text-muted-foreground leading-relaxed text-lg">{t("story.p2")}</p>
         </div>
         <div className="relative">
           <img
             src={riga}
-            alt="Cobblestone street in Riga Old Town"
+            alt={t("visit.title")}
             width={1400}
             height={900}
             loading="lazy"
@@ -129,11 +132,9 @@ function Story() {
           <div className="absolute -bottom-8 -left-8 bg-card border border-border p-8 max-w-xs hidden md:block">
             <p className="font-serif text-primary text-3xl">5.0</p>
             <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">
-              Google Reviews
+              {t("story.rating")}
             </p>
-            <p className="text-sm text-muted-foreground mt-3">
-              "Great service, awesome souvenirs and low prices."
-            </p>
+            <p className="text-sm text-muted-foreground mt-3">"{t("story.review")}"</p>
           </div>
         </div>
       </div>
@@ -141,25 +142,26 @@ function Story() {
   );
 }
 
-function Collection() {
+
+function Collection({ t }: { t: (key: string) => string }) {
   const items = [
     {
-      title: "Pure Latvian Linen",
-      desc: "Tablecloths, kitchen towels, scarves and apparel — woven from flax grown in the Baltic countryside.",
+      title: t("collection.linen.title"),
+      desc: t("collection.linen.desc"),
       img: linenStack,
-      tag: "Linen",
+      tag: t("collection.linen.tag"),
     },
     {
-      title: "Hand-knit Wool Mittens",
-      desc: "Traditional folk patterns, each pair knitted by hand. Warm enough for a Latvian winter.",
+      title: t("collection.mittens.title"),
+      desc: t("collection.mittens.desc"),
       img: mittens,
-      tag: "Wool",
+      tag: t("collection.mittens.tag"),
     },
     {
-      title: "Folk Pattern Hats",
-      desc: "Recommended by visitors — wonderful colors and designs, crafted to be kept for years.",
+      title: t("collection.hats.title"),
+      desc: t("collection.hats.desc"),
       img: hat,
-      tag: "Knitwear",
+      tag: t("collection.hats.tag"),
     },
   ];
   return (
@@ -167,15 +169,12 @@ function Collection() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
           <div className="max-w-2xl">
-            <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">The Collection</p>
+            <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("collection.label")}</p>
             <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight">
-              Quiet craft, made to be carried home.
+              {t("collection.title")}
             </h2>
           </div>
-          <p className="text-muted-foreground max-w-sm">
-            A small selection of what you'll find in store. Stock changes with the seasons
-            and what our makers send us.
-          </p>
+          <p className="text-muted-foreground max-w-sm">{t("collection.intro")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -202,14 +201,14 @@ function Collection() {
 
         <div className="mt-20 grid md:grid-cols-4 gap-8 border-t border-border pt-12">
           {[
-            ["Amber Jewelry", "Polished Baltic amber, set in silver."],
-            ["Wooden Crafts", "Carved spoons, bowls, ornaments."],
-            ["Herbal Teas & Honey", "Forest gathered, small batch."],
-            ["Folk Ceramics", "Hand-thrown, signed by the potter."],
-          ].map(([t, d]) => (
-            <div key={t}>
-              <h4 className="font-serif text-xl text-primary mb-2">{t}</h4>
-              <p className="text-sm text-muted-foreground">{d}</p>
+            [t("collection.amber"), t("collection.amber.desc")],
+            [t("collection.wood"), t("collection.wood.desc")],
+            [t("collection.tea"), t("collection.tea.desc")],
+            [t("collection.ceramic"), t("collection.ceramic.desc")],
+          ].map(([title, desc]) => (
+            <div key={title}>
+              <h4 className="font-serif text-xl text-primary mb-2">{title}</h4>
+              <p className="text-sm text-muted-foreground">{desc}</p>
             </div>
           ))}
         </div>
@@ -218,31 +217,32 @@ function Collection() {
   );
 }
 
-function Reviews() {
+
+function Reviews({ t }: { t: (key: string) => string }) {
   const reviews = [
     {
       name: "Mark P",
-      when: "Google Review",
-      text: "The store sells a variety of knitted hats. The colors and designs are wonderful. I recommend visiting the gift store! I would love to return.",
+      when: t("reviews.google"),
+      text: t("reviews.mark"),
     },
     {
       name: "Michael Woodall",
-      when: "Google Review",
-      text: "Found all of the linen things I wanted in Latvia at a decent price. They have anything from ties to tablecloths — beautifully made.",
+      when: t("reviews.google"),
+      text: t("reviews.michael"),
     },
     {
       name: "Igor Kowalski",
-      when: "Google Review",
-      text: "Great service, awesome souvenirs and low prices. A must-visit when you're in Riga.",
+      when: t("reviews.google"),
+      text: t("reviews.igor"),
     },
   ];
   return (
     <section id="reviews" className="py-28 md:py-40 bg-background">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">5.0 on Google</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("reviews.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-primary max-w-2xl mx-auto leading-tight">
-            Loved by visitors from across the world.
+            {t("reviews.title")}
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -263,18 +263,18 @@ function Reviews() {
   );
 }
 
-function Visit() {
+
+function Visit({ t }: { t: (key: string) => string }) {
   return (
     <section id="visit" className="py-28 md:py-40 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16">
         <div>
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">Visit Us</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("visit.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl leading-tight mb-8">
-            In the oldest corner of Riga.
+            {t("visit.title")}
           </h2>
           <p className="text-primary-foreground/80 leading-relaxed text-lg mb-10 max-w-md">
-            Step inside, take your time, and let one of our pieces find you.
-            We're happy to wrap anything as a gift.
+            {t("visit.description")}
           </p>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Linen+and+Souvenirs+Maz%C4%81+Pils+iela+4+Riga"
@@ -282,22 +282,22 @@ function Visit() {
             rel="noreferrer"
             className="inline-flex bg-accent text-accent-foreground px-7 py-4 text-sm uppercase tracking-wide hover:bg-accent/90 transition"
           >
-            Get Directions
+            {t("visit.directions")}
           </a>
         </div>
         <dl className="space-y-8 text-primary-foreground/90">
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Address</dt>
-            <dd className="font-serif text-2xl">Mazā Pils iela 4</dd>
-            <dd>Centra rajons, Rīga, LV-1050</dd>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.address")}</dt>
+            <dd className="font-serif text-2xl">{t("visit.street")}</dd>
+            <dd>{t("visit.city")}</dd>
           </div>
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Hours</dt>
-            <dd>Tue – Sun · 11:00 — 18:00</dd>
-            <dd className="text-primary-foreground/60 text-sm mt-1">Closed Mondays</dd>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.hours")}</dt>
+            <dd>{t("visit.open")}</dd>
+            <dd className="text-primary-foreground/60 text-sm mt-1">{t("visit.closed")}</dd>
           </div>
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Phone</dt>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.phone")}</dt>
             <dd>
               <a href="tel:+37126554999" className="font-serif text-2xl hover:text-accent transition">
                 +371 26 554 999
@@ -310,13 +310,14 @@ function Visit() {
   );
 }
 
-function Footer() {
+function Footer({ t }: { t: (key: string) => string }) {
   return (
     <footer className="bg-primary text-primary-foreground/70 border-t border-primary-foreground/10">
       <div className="mx-auto max-w-7xl px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm">
-        <p className="font-serif text-primary-foreground">Linen & Souvenirs · Riga</p>
-        <p>© {new Date().getFullYear()} · Mazā Pils iela 4, Rīga</p>
+        <p className="font-serif text-primary-foreground">{t("footer.brand")}</p>
+        <p>{t("footer.copy").replace("{year}", String(new Date().getFullYear()))}</p>
       </div>
     </footer>
   );
 }
+

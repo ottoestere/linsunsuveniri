@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
+import { useI18n } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { getPost } from "@/lib/wordpress.functions";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -25,6 +27,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function Post() {
+  const { t } = useI18n();
   const { slug } = Route.useParams();
   const fetchPost = useServerFn(getPost);
   const { data, isLoading, error } = useQuery({
@@ -39,14 +42,17 @@ function Post() {
           <Link to="/" className="font-serif text-xl text-primary">
             Linen <span className="opacity-60">&</span> Souvenirs
           </Link>
-          <Link to="/blog" className="text-sm text-muted-foreground hover:text-primary">
-            ← All posts
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link to="/blog" className="text-sm text-muted-foreground hover:text-primary">
+              ← {t("blog.allPosts")}
+            </Link>
+            <LanguageSwitcher className="text-muted-foreground" />
+          </div>
         </div>
       </header>
 
       <article className="mx-auto max-w-3xl px-6 py-20">
-        {isLoading && <p className="text-muted-foreground">Loading…</p>}
+        {isLoading && <p className="text-muted-foreground">{t("blog.postLoading")}</p>}
         {error && <p className="text-muted-foreground">{(error as Error).message}</p>}
         {data && (
           <>
