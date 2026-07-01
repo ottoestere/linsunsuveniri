@@ -143,25 +143,25 @@ function Story({ t }: { t: (key: string) => string }) {
 }
 
 
-function Collection() {
+function Collection({ t }: { t: (key: string) => string }) {
   const items = [
     {
-      title: "Pure Latvian Linen",
-      desc: "Tablecloths, kitchen towels, scarves and apparel — woven from flax grown in the Baltic countryside.",
+      title: t("collection.linen.title"),
+      desc: t("collection.linen.desc"),
       img: linenStack,
-      tag: "Linen",
+      tag: t("collection.linen.tag"),
     },
     {
-      title: "Hand-knit Wool Mittens",
-      desc: "Traditional folk patterns, each pair knitted by hand. Warm enough for a Latvian winter.",
+      title: t("collection.mittens.title"),
+      desc: t("collection.mittens.desc"),
       img: mittens,
-      tag: "Wool",
+      tag: t("collection.mittens.tag"),
     },
     {
-      title: "Folk Pattern Hats",
-      desc: "Recommended by visitors — wonderful colors and designs, crafted to be kept for years.",
+      title: t("collection.hats.title"),
+      desc: t("collection.hats.desc"),
       img: hat,
-      tag: "Knitwear",
+      tag: t("collection.hats.tag"),
     },
   ];
   return (
@@ -169,15 +169,12 @@ function Collection() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
           <div className="max-w-2xl">
-            <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">The Collection</p>
+            <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("collection.label")}</p>
             <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight">
-              Quiet craft, made to be carried home.
+              {t("collection.title")}
             </h2>
           </div>
-          <p className="text-muted-foreground max-w-sm">
-            A small selection of what you'll find in store. Stock changes with the seasons
-            and what our makers send us.
-          </p>
+          <p className="text-muted-foreground max-w-sm">{t("collection.intro")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -204,14 +201,14 @@ function Collection() {
 
         <div className="mt-20 grid md:grid-cols-4 gap-8 border-t border-border pt-12">
           {[
-            ["Amber Jewelry", "Polished Baltic amber, set in silver."],
-            ["Wooden Crafts", "Carved spoons, bowls, ornaments."],
-            ["Herbal Teas & Honey", "Forest gathered, small batch."],
-            ["Folk Ceramics", "Hand-thrown, signed by the potter."],
-          ].map(([t, d]) => (
-            <div key={t}>
-              <h4 className="font-serif text-xl text-primary mb-2">{t}</h4>
-              <p className="text-sm text-muted-foreground">{d}</p>
+            [t("collection.amber"), t("collection.amber.desc")],
+            [t("collection.wood"), t("collection.wood.desc")],
+            [t("collection.tea"), t("collection.tea.desc")],
+            [t("collection.ceramic"), t("collection.ceramic.desc")],
+          ].map(([title, desc]) => (
+            <div key={title}>
+              <h4 className="font-serif text-xl text-primary mb-2">{title}</h4>
+              <p className="text-sm text-muted-foreground">{desc}</p>
             </div>
           ))}
         </div>
@@ -219,6 +216,7 @@ function Collection() {
     </section>
   );
 }
+
 
 function Reviews() {
   const reviews = [
