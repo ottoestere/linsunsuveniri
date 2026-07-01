@@ -264,18 +264,17 @@ function Reviews({ t }: { t: (key: string) => string }) {
 }
 
 
-function Visit() {
+function Visit({ t }: { t: (key: string) => string }) {
   return (
     <section id="visit" className="py-28 md:py-40 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16">
         <div>
-          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">Visit Us</p>
+          <p className="text-accent uppercase tracking-[0.3em] text-xs mb-6">{t("visit.label")}</p>
           <h2 className="font-serif text-4xl md:text-5xl leading-tight mb-8">
-            In the oldest corner of Riga.
+            {t("visit.title")}
           </h2>
           <p className="text-primary-foreground/80 leading-relaxed text-lg mb-10 max-w-md">
-            Step inside, take your time, and let one of our pieces find you.
-            We're happy to wrap anything as a gift.
+            {t("visit.description")}
           </p>
           <a
             href="https://www.google.com/maps/search/?api=1&query=Linen+and+Souvenirs+Maz%C4%81+Pils+iela+4+Riga"
@@ -283,22 +282,22 @@ function Visit() {
             rel="noreferrer"
             className="inline-flex bg-accent text-accent-foreground px-7 py-4 text-sm uppercase tracking-wide hover:bg-accent/90 transition"
           >
-            Get Directions
+            {t("visit.directions")}
           </a>
         </div>
         <dl className="space-y-8 text-primary-foreground/90">
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Address</dt>
-            <dd className="font-serif text-2xl">Mazā Pils iela 4</dd>
-            <dd>Centra rajons, Rīga, LV-1050</dd>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.address")}</dt>
+            <dd className="font-serif text-2xl">{t("visit.street")}</dd>
+            <dd>{t("visit.city")}</dd>
           </div>
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Hours</dt>
-            <dd>Tue – Sun · 11:00 — 18:00</dd>
-            <dd className="text-primary-foreground/60 text-sm mt-1">Closed Mondays</dd>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.hours")}</dt>
+            <dd>{t("visit.open")}</dd>
+            <dd className="text-primary-foreground/60 text-sm mt-1">{t("visit.closed")}</dd>
           </div>
           <div className="border-t border-primary-foreground/20 pt-6">
-            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">Phone</dt>
+            <dt className="text-xs uppercase tracking-[0.3em] text-primary-foreground/60 mb-2">{t("visit.phone")}</dt>
             <dd>
               <a href="tel:+37126554999" className="font-serif text-2xl hover:text-accent transition">
                 +371 26 554 999
@@ -311,13 +310,14 @@ function Visit() {
   );
 }
 
-function Footer() {
+function Footer({ t }: { t: (key: string) => string }) {
   return (
     <footer className="bg-primary text-primary-foreground/70 border-t border-primary-foreground/10">
       <div className="mx-auto max-w-7xl px-6 py-10 flex flex-wrap items-center justify-between gap-4 text-sm">
-        <p className="font-serif text-primary-foreground">Linen & Souvenirs · Riga</p>
-        <p>© {new Date().getFullYear()} · Mazā Pils iela 4, Rīga</p>
+        <p className="font-serif text-primary-foreground">{t("footer.brand")}</p>
+        <p>{t("footer.copy").replace("{year}", String(new Date().getFullYear()))}</p>
       </div>
     </footer>
   );
 }
+
