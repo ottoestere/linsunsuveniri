@@ -5,6 +5,7 @@ type Lang = "en" | "lv";
 const STORAGE_KEY = "linenriga-lang";
 
 const translations: Record<Lang, Record<string, string>> = {
+
   en: {
     // Navigation
     "nav.home": "Home",
