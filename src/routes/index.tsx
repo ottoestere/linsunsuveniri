@@ -23,18 +23,20 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Story />
-      <Collection />
-      <Reviews />
-      <Visit />
-      <Footer />
+      <Nav t={t} />
+      <Hero t={t} />
+      <Story t={t} />
+      <Collection t={t} />
+      <Reviews t={t} />
+      <Visit t={t} />
+      <Footer t={t} />
     </div>
   );
 }
+
 
 function Nav() {
   return (
